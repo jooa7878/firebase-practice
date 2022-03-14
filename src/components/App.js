@@ -13,11 +13,13 @@ import Navigation from "./Navigation";
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [init, setInit] = useState(false);
+  const [userObj, setUserObj] = useState(null);
 
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {
         setIsLogin(true);
+        setUserObj(user);
       } else {
         setIsLogin(false);
       }
@@ -32,7 +34,11 @@ function App() {
           {isLogin ? (
             <>
               <Navigation />
-              <Route path="/" exact component={Home}></Route>
+              <Route
+                path="/"
+                exact
+                render={() => <Home userObj={userObj} />}
+              ></Route>
               <Route path="/profile" exact component={Profile} />
               <Route path="/edit" exact component={EditProfile}></Route>
             </>

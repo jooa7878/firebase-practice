@@ -55,8 +55,7 @@ function Auth() {
         provider = new GithubAuthProvider();
       }
 
-      const data = await signInWithPopup(authService, provider);
-      console.log(data);
+      await signInWithPopup(authService, provider);
     } catch (e) {
       console.log(e);
     }
